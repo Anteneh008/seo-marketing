@@ -6,6 +6,7 @@ import { Button } from "./ui/button";
 import { BarChart3, Loader2, LogIn } from "lucide-react";
 import { AuthLoading, Unauthenticated, Authenticated } from "convex/react";
 import { SignInButton, UserButton } from "@clerk/nextjs";
+import { ThemeToggle } from "./ThemeToggle";
 
 function Header() {
   const pathname = usePathname();
@@ -22,7 +23,7 @@ function Header() {
     >
       <div className="mx-auto flex h-14 max-w-7xl items-center gap-2 px-4">
         <div className="flex flex-1 items-center gap-3">
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2 ">
             <span className="inline-flex size-6 items-center justify-center rounded-md bg-foreground text-background">
               B
             </span>
@@ -38,7 +39,7 @@ function Header() {
             </Button>
           </Link>
 
-          {/* <ThemeToggle /> */}
+          <ThemeToggle />
 
           <AuthLoading>
             <Button variant="outline">
