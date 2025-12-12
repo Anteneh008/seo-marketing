@@ -8,7 +8,9 @@
  * @module
  */
 
-import type * as myFunctions from "../myFunctions.js";
+import type * as analysis from "../analysis.js";
+import type * as http from "../http.js";
+import type * as scrapingJobs from "../scrapingJobs.js";
 
 import type {
   ApiFromModules,
@@ -17,7 +19,9 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
-  myFunctions: typeof myFunctions;
+  analysis: typeof analysis;
+  http: typeof http;
+  scrapingJobs: typeof scrapingJobs;
 }>;
 
 /**
