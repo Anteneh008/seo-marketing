@@ -10,7 +10,7 @@ const evidenceSchema = z.object({
 const sourceSchema = z.object({
   title: z.string(),
   url: z.string(),
-  description: z.number().nullable(),
+  description: z.string().nullable(),
 });
 
 // Main SEO report schema
@@ -31,7 +31,7 @@ export const seoReportSchema = z.object({
   }),
 
   inventory: z.object({
-    toatl_sources: z.number(),
+    total_sources: z.number(),
     unique_domains: z.array(z.string()),
     source_types: z.object({
       // Existing categories remain supported
@@ -146,58 +146,9 @@ export const seoReportSchema = z.object({
 
       date_range: z.object({
         earliest: z.string().nullable(),
-        latest: z.string().nullable,
+        latest: z.string().nullable(),
       }),
     }),
-
-    keywords: z.object({
-      content_keywords: z
-        .array(
-          z.object({
-            keyword: z.string(),
-            intent: z
-              .enum([
-                "informational",
-                "navigational",
-                "transactional",
-                "commercial",
-              ])
-              .optional(),
-            evidence: z.array(evidenceSchema),
-          }),
-        )
-        .max(25),
-
-      keyword_themes: z
-        .array(
-          z.object({
-            theme: z.string(),
-            keywords: z.array(z.string()).max(8),
-            evidence: z.array(evidenceSchema),
-          }),
-        )
-        .max(8),
-    }),
-
-    competitors: z
-      .array(
-        z.object({
-          name: z.string().nullable(),
-          domain: z.string(),
-          strength_score: z.number().min(0).max(10),
-          overlap_keywords: z.array(z.string()),
-          unique_advantages: z.array(z.string()),
-          relationship: z.enum([
-            "competitor",
-            "employer",
-            "partner",
-            "unknown",
-          ]),
-          evidence: z.array(evidenceSchema),
-        }),
-      )
-      .min(0)
-      .max(15),
   }),
 
   content_analysis: z.object({
@@ -274,7 +225,7 @@ export const seoReportSchema = z.object({
 
   backlink_analysis: z.object({
     total_backlinks: z.number(),
-    referring_doamins: z.number(),
+    referring_domains: z.number(),
     backlink_sources: z.array(
       z.object({
         source_type: z.enum([
@@ -371,7 +322,7 @@ export type SentimentAnalysis = NonNullable<
 export type SourceType = keyof NonNullable<
   SeoReport["inventory"]["source_types"]
 >;
-export type EntityType = keyof SeoReport["meta"]["entity_type"];
+export type EntityType = SeoReport["meta"]["entity_type"];
 export type RecommendationCategory = Recommendation["category"];
 export type CompetitorRelationship = Competitor["relationship"];
 export type SocialPlatform = NonNullable<

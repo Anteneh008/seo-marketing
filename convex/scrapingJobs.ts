@@ -287,6 +287,8 @@ export const getJobBySnapshotId = query({
         throw new Error("Stored seoReport failed validation");
       }
     }
+
+    return job;
   },
 });
 

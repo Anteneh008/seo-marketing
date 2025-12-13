@@ -3,6 +3,7 @@
 import { internalAction, action } from "./_generated/server";
 import { v } from "convex/values";
 import { openai } from "@ai-sdk/openai";
+import { google } from "@ai-sdk/google";
 import { generateObject } from "ai";
 import { buildAnalysisPrompt, systemPrompt } from "../prompts/gpt";
 import { seoReportSchema } from "../lib/seo-schema";
@@ -50,8 +51,10 @@ export const runAnalysis = internalAction({
 
       console.log("Generating SEO report for job:", args.jobId);
 
+      // it auto process.env.OPENAI_API_KEY
       const { object: seoReport } = await generateObject({
-        model: openai("gpt-4o"),
+        // model: openai("gpt-4o"),
+        model: google("gemini-2.0-flash"),
         system: systemPrompt(),
         prompt: analysisPrompt,
         schema: seoReportSchema,
@@ -61,7 +64,7 @@ export const runAnalysis = internalAction({
         entity_name: seoReport.meta.entity_name,
         entity_type: seoReport.meta.entity_type,
         confidence_score: seoReport.meta.confidence_score,
-        total_sources: seoReport.inventory.toatl_sources,
+        total_sources: seoReport.inventory.total_sources,
         recommendations_count: seoReport.recommendations?.length || 0,
         summary_score: seoReport.summary?.overall_score || 0,
       });
