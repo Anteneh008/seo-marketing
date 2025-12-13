@@ -1,7 +1,14 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { FileText, Plus, Sparkles } from "lucide-react";
+import {
+  BarChart,
+  BarChart3,
+  FileText,
+  Loader2,
+  Plus,
+  Sparkles,
+} from "lucide-react";
 import {
   Card,
   CardContent,
@@ -13,6 +20,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import CountrySelector from "@/components/CountrySelector";
 import startScraping from "@/actions/startScraping";
+import { AuthLoading, Authenticated } from "convex/react";
+import ReportsTable from "@/components/ReportsTable";
 
 function DashboardPage() {
   const [prompt, setPrompt] = useState("");
@@ -134,6 +143,29 @@ function DashboardPage() {
                   </div>
                 </div>
               </form>
+            </CardContent>
+          </Card>
+
+          {/* Reports Section */}
+          <Card className="border-0 shadow-lg bg-card/50 backdrop-blur-sm">
+            <CardHeader>
+              <div className="flex items-center gap-2">
+                <BarChart3 className="w-5 h-5 text-primary" />
+                <CardTitle className="text-2xl">Recent Reports</CardTitle>
+              </div>
+              <CardDescription>
+                Track the progress of your SEO analysis reports
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Authenticated>
+                <ReportsTable />
+              </Authenticated>
+              <AuthLoading>
+                <div className="flex items-center justify-center">
+                  <Loader2 className="w-6 h-6 animate-spin mr-2" />
+                </div>
+              </AuthLoading>
             </CardContent>
           </Card>
         </div>

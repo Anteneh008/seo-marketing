@@ -2,7 +2,7 @@
 
 import { internalAction, action } from "./_generated/server";
 import { v } from "convex/values";
-import { openai } from "@ai-sdk/openai";
+// import { openai } from "@ai-sdk/openai";
 import { google } from "@ai-sdk/google";
 import { generateObject } from "ai";
 import { buildAnalysisPrompt, systemPrompt } from "../prompts/gpt";
