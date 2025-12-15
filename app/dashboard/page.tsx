@@ -107,12 +107,11 @@ function DashboardPage() {
                     >
                       {isLoading ? (
                         <>
-                          <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin mr-3">
-                            <span className="hidden lg:inline">
-                              Generating Report...
-                            </span>
-                            <span className="lg:hidden">Generating</span>
-                          </div>
+                          <Loader2 className="w-5 h-5 animate-spin mr-3" />
+                          <span className="hidden lg:inline">
+                            Generating Report...
+                          </span>
+                          <span className="lg:hidden">Generating</span>
                         </>
                       ) : (
                         <>
